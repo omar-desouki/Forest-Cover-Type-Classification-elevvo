@@ -50,33 +50,33 @@ def train_random_forest(
 
     if grid_search:
         # Define parameter grid for grid search
-        param_grid = {
-            "n_estimators": [100, 200, 300],
-            "max_depth": [None, 10, 20, 30],
-            "min_samples_split": [2, 5, 10],
-            "min_samples_leaf": [1, 2, 4],
-            "max_features": ["sqrt", "log2", None],
-            "bootstrap": [True, False],
-        }
-
         # param_grid = {
-        #     "n_estimators": [200, 300],
+        #     "n_estimators": [100, 200, 300],
         #     "max_depth": [None, 10, 20, 30],
-        #     "min_samples_split": [5, 10],
-        #     "min_samples_leaf": [2, 4],
+        #     "min_samples_split": [2, 5, 10],
+        #     "min_samples_leaf": [1, 2, 4],
         #     "max_features": ["sqrt", "log2", None],
         #     "bootstrap": [True, False],
         # }
 
+        param_grid = {
+            "n_estimators": [200, 300],  # Reduced from [100, 200, 300]
+            "max_depth": [10, 20, None],  # Reduced from [None, 10, 20, 30]
+            "min_samples_split": [5, 10],  # Reduced from [2, 5, 10]
+            "min_samples_leaf": [2, 4],  # Reduced from [1, 2, 4]
+            "max_features": ["sqrt", "log2"],  # Reduced from ["sqrt", "log2", None]
+            "bootstrap": [True, False],
+        }
+
         # Create Random Forest model
         rf = RandomForestClassifier(
-            random_state=random_state, class_weight=balanced, verbose=1
+            random_state=random_state, class_weight=balanced, verbose=0
         )
 
         # Perform grid search
         print(f"Performing grid search using {os.cpu_count()} CPU cores...")
         grid_search_cv = GridSearchCV(
-            rf, param_grid, cv=5, scoring="f1_macro", n_jobs=os.cpu_count(), verbose=1
+            rf, param_grid, cv=5, scoring="f1_macro", n_jobs=os.cpu_count(), verbose=3
         )
         grid_search_cv.fit(X_train, y_train)
 
@@ -87,8 +87,16 @@ def train_random_forest(
 
     else:
         # Train simple Random Forest
+        # model = RandomForestClassifier(
+        #     random_state=random_state, n_estimators=100, class_weight=balanced
+        # )
+        # after grid search this was the best model
         model = RandomForestClassifier(
-            random_state=random_state, n_estimators=100, class_weight=balanced
+            bootstrap=False,
+            min_samples_leaf=2,
+            min_samples_split=5,
+            n_estimators=300,
+            random_state=42,
         )
         model.fit(X_train, y_train)
 
