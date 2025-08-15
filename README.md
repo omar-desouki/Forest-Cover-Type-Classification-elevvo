@@ -172,6 +172,7 @@ train_random_forest(X, y, grid_search=False, balanced=None)
 - **bootstrap**: True (default)
 
 **Performance Metrics:**
+
 - **Test Accuracy**: 95.33%
 - **Precision**: 94.63%
 - **Recall**: 90.53%
@@ -194,6 +195,7 @@ train_random_forest(X, y, grid_search=True, balanced=None)
 - **bootstrap**: False
 
 **Performance Metrics:**
+
 - **Test Accuracy**: 95.64%
 - **Precision**: 94.80%
 - **Recall**: 91.06%
@@ -218,6 +220,7 @@ train_random_forest(X, y, grid_search=False, balanced='balanced')
 - **class_weight**: 'balanced'
 
 **Performance Metrics:**
+
 - **Test Accuracy**: 95.64%
 - **Precision**: 94.80%
 - **Recall**: 91.06%
@@ -227,11 +230,11 @@ train_random_forest(X, y, grid_search=False, balanced='balanced')
 
 ### Performance Comparison Summary:
 
-| Model Variant | Test Accuracy | Precision | Recall | Macro F1-Score |
-|---------------|---------------|-----------|--------|----------------|
-| Default Parameters | 95.33% | 94.63% | 90.53% | 92.41% |
-| Grid Search Optimized | 95.64% | 94.80% | 91.06% | 92.79% |
-| Balanced Classes | 95.64% | 94.80% | 91.06% | 92.79% |
+| Model Variant         | Test Accuracy | Precision | Recall | Macro F1-Score |
+| --------------------- | ------------- | --------- | ------ | -------------- |
+| Default Parameters    | 95.33%        | 94.63%    | 90.53% | 92.41%         |
+| Grid Search Optimized | 95.64%        | 94.80%    | 91.06% | 92.79%         |
+| Balanced Classes      | 95.64%        | 94.80%    | 91.06% | 92.79%         |
 
 ### Top Important Features (Consistent across all models):
 
